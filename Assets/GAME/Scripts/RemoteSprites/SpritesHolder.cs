@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -30,16 +31,24 @@ namespace Assets.GAME.Scripts.RemoteSprites{
 
             if (CardFrontSprite != null) {
 
-                for (int i = 0; i < _spritesData.BackCardsUrls.Count; i++) {
+                var loadTasks = _spritesData.BackCardsUrls
+                    .Select(async (url, index) =>
+                    {
+                        var sprite = await LoadSpriteAsync(url);
+                        return (sprite, index, url);
+                    });
 
-                    Sprite cardBackSprite = await LoadSpriteAsync(_spritesData.BackCardsUrls[i]);
+                var results = await Task.WhenAll(loadTasks);
 
-                    if (cardBackSprite != null) {
-                        CardBackSprites.Add(cardBackSprite);
-                    } else {
-                        OnLoadFailedEvent?.Invoke("Back card sprite index = " + i + " not loaded! Check url");
+                foreach (var (sprite, index, url) in results) {
+
+                    if (sprite == null) {
+                        OnLoadFailedEvent?.Invoke(
+                            "Failed to load back card sprite at index " + index + " not loaded! Check url");
                         return;
                     }
+
+                    CardBackSprites.Add(sprite);
                 }
 
                 OnLoadCompleteEvent?.Invoke();
