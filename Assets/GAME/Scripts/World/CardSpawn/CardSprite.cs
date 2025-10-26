@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.GAME.Scripts.World {
+namespace Assets.GAME.Scripts.World.CardSpawn{
 
     public class CardSprite {
 

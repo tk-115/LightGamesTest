@@ -1,9 +1,10 @@
 ﻿using Assets.GAME.Scripts.Card;
 using Assets.GAME.Scripts.RemoteSprites;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.GAME.Scripts.World {
+namespace Assets.GAME.Scripts.World.CardSpawn {
 
     public class CardSpawner : MonoBehaviour {
 
@@ -13,7 +14,8 @@ namespace Assets.GAME.Scripts.World {
         [SerializeField] private SpritesHolder _spritesHolder;
 
         private List<CardSprite> _cardSprites = new List<CardSprite>();
-        private List<CardMain> _cards = new List<CardMain>();
+
+        public List<CardMain> SpawnedCards { get; private set; } = new List<CardMain>();
 
         public void Initialize() {
             ClearSpawnedCards();
@@ -23,9 +25,9 @@ namespace Assets.GAME.Scripts.World {
         }
 
         private void ClearSpawnedCards() {
-            for (int i = 0; i < _cards.Count; i++) Destroy(_cards[i].gameObject);
+            for (int i = 0; i < SpawnedCards.Count; i++) Destroy(SpawnedCards[i].gameObject);
 
-            _cards.Clear();
+            SpawnedCards.Clear();
         }
 
         private void GenerateCardSprites() {
@@ -44,7 +46,7 @@ namespace Assets.GAME.Scripts.World {
                 Sprite spriteTemp = _cardSprites[i].BackSprite;
                 int idTemp = _cardSprites[i].ID;
 
-                int randomIndex = Random.Range(i, _cardSprites.Count);
+                int randomIndex = UnityEngine.Random.Range(i, _cardSprites.Count);
                 _cardSprites[i] = _cardSprites[randomIndex];
 
                 _cardSprites[randomIndex].BackSprite = spriteTemp;
@@ -81,6 +83,7 @@ namespace Assets.GAME.Scripts.World {
                         _cardSprites[spriteID].BackSprite);
 
                     spriteID++;
+                    SpawnedCards.Add(card);
                 }
             }
         }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.GAME.Scripts.World {
+namespace Assets.GAME.Scripts.World.CardSpawn{
 
     [CreateAssetMenu(fileName = "Card Spawner Config", menuName = "World/Card Spawner Config")]
     public class CardSpawnerConfig : ScriptableObject {
