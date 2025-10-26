@@ -64,6 +64,8 @@ namespace Assets.GAME.Scripts.World.Player {
                 return;
             }
 
+            if (card == _firstSelectedCard) return;
+
             if (_secondSelectedCard == null) {
                 _secondSelectedCard = card;
                 card.Select();
