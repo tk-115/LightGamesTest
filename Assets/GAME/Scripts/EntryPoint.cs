@@ -16,6 +16,8 @@ namespace Assets.GAME.Scripts {
         [field: SerializeField] public CameraFocus CameraFocus { get; private set; }
         [field: SerializeField] public PlayerSelector PlayerSelector { get; private set; }
 
+        [field: SerializeField] public AdaptiveFloor AdaptiveFloor { get; private set; }
+
         [field: SerializeField] public LoadingScreenView LoadingScreenView { get; private set; }
         [field: SerializeField] public GameplayScreenView GameplayScreenView { get; private set; }
 
