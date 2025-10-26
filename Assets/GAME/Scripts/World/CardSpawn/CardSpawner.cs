@@ -36,6 +36,9 @@ namespace Assets.GAME.Scripts.World.CardSpawn {
 
             for (int i = 0; i < _config.Rows * _config.Columns; i++) {
                 _cardSprites.Add(new CardSprite(spriteId, _spritesHolder.CardBackSprites[spriteId]));
+
+                Debug.Log("card id add " + spriteId);
+
                 spriteId++;
 
                 if (spriteId >= _spritesHolder.CardBackSprites.Count) spriteId = 0;
@@ -43,14 +46,12 @@ namespace Assets.GAME.Scripts.World.CardSpawn {
 
             //Stir
             for (int i = 0; i < _cardSprites.Count; i++) {
-                Sprite spriteTemp = _cardSprites[i].BackSprite;
-                int idTemp = _cardSprites[i].ID;
+                CardSprite cardSpriteTemp = _cardSprites[i];
 
                 int randomIndex = UnityEngine.Random.Range(i, _cardSprites.Count);
                 _cardSprites[i] = _cardSprites[randomIndex];
 
-                _cardSprites[randomIndex].BackSprite = spriteTemp;
-                _cardSprites[randomIndex].ID = idTemp;   
+                _cardSprites[randomIndex] = cardSpriteTemp; 
             }
         }
 
