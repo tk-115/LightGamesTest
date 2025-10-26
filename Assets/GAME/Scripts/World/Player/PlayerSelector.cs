@@ -20,6 +20,7 @@ namespace Assets.GAME.Scripts.World.Player {
 
         private int _pairsComplete;
         private int _targetPairsCount;
+        private int _totalPairsComplete;
         private float _timer;
 
         public void ResetPairsComplete() => _pairsComplete = 0;
@@ -80,8 +81,10 @@ namespace Assets.GAME.Scripts.World.Player {
             if (_firstSelectedCard.ID == _secondSelectedCard.ID) {
                 _firstSelectedCard.Hide();
                 _secondSelectedCard.Hide();
+
                 _pairsComplete++;
-                OnPairCompleteEvent?.Invoke(_pairsComplete);
+                _totalPairsComplete++;
+                OnPairCompleteEvent?.Invoke(_totalPairsComplete);
             }
             else {
                 _firstSelectedCard.Deselect();
