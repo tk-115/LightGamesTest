@@ -5,6 +5,5 @@ namespace Assets.GAME.Scripts.Common {
 
         public void Enter();
         public void Exit();
-        public void Update();
     }
 }

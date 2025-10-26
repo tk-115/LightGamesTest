@@ -16,9 +16,10 @@ namespace Assets.GAME.Scripts.States {
 
                 new LoadingState(this, entryPoint.LoadingScreenView, entryPoint.SpritesHolder),
 
-                new CardSetupState(this, entryPoint.CardSpawner, entryPoint.CameraFocus),
+                new CardSetupState(this, entryPoint.CardSpawner, entryPoint.CameraFocus, 
+                    entryPoint.PlayerSelector, entryPoint.AdaptiveFloor),
 
-                new GameplayState()
+                new GameplayState(this, entryPoint.PlayerSelector, entryPoint.GameplayScreenView)
             };
 
             _currentState = _allStates[0];
@@ -38,7 +39,5 @@ namespace Assets.GAME.Scripts.States {
             _currentState = state;
             _currentState.Enter();
         }
-
-        public void Update() => _currentState.Update();
     }
 }

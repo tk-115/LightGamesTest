@@ -1,6 +1,5 @@
 ﻿using Assets.GAME.Scripts.Card;
 using Assets.GAME.Scripts.RemoteSprites;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,23 +15,18 @@ namespace Assets.GAME.Scripts.World.CardSpawn {
         private List<CardSprite> _cardSprites = new List<CardSprite>();
 
         public List<CardMain> SpawnedCards { get; private set; } = new List<CardMain>();
+        public int PairCount { get; private set; }
 
         public void Initialize() {
-            ClearSpawnedCards();
-
+            SpawnedCards.Clear();
             GenerateCardSprites();
             SpawnCards();
-        }
-
-        private void ClearSpawnedCards() {
-            for (int i = 0; i < SpawnedCards.Count; i++) Destroy(SpawnedCards[i].gameObject);
-
-            SpawnedCards.Clear();
         }
 
         private void GenerateCardSprites() {
             _cardSprites.Clear();
             int spriteId = 0;
+            PairCount = (_config.Rows * _config.Columns) / 2;
 
             for (int i = 0; i < _config.Rows * _config.Columns; i++) {
                 _cardSprites.Add(new CardSprite(spriteId, _spritesHolder.CardBackSprites[spriteId]));
@@ -43,14 +37,12 @@ namespace Assets.GAME.Scripts.World.CardSpawn {
 
             //Stir
             for (int i = 0; i < _cardSprites.Count; i++) {
-                Sprite spriteTemp = _cardSprites[i].BackSprite;
-                int idTemp = _cardSprites[i].ID;
+                CardSprite cardSpriteTemp = _cardSprites[i];
 
                 int randomIndex = UnityEngine.Random.Range(i, _cardSprites.Count);
                 _cardSprites[i] = _cardSprites[randomIndex];
 
-                _cardSprites[randomIndex].BackSprite = spriteTemp;
-                _cardSprites[randomIndex].ID = idTemp;   
+                _cardSprites[randomIndex] = cardSpriteTemp; 
             }
         }
 
