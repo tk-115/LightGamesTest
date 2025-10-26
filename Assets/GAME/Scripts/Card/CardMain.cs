@@ -47,6 +47,12 @@ namespace Assets.GAME.Scripts.Card {
             _view.PlayAnimation(CardState.SELECT.ToString());
         }
 
+        public void Hide() {
+            _timer = 0;
+            _state = CardState.HIDE;
+            _view.PlayAnimation(_state.ToString());
+        }
+
         private void OnCardRotate() {
             if (_state == CardState.SELECT)
                 _view.SetCardSprite(_backSprite);

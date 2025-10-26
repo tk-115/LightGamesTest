@@ -18,7 +18,7 @@ namespace Assets.GAME.Scripts.States {
 
                 new CardSetupState(this, entryPoint.CardSpawner, entryPoint.CameraFocus),
 
-                new GameplayState()
+                new GameplayState(this, entryPoint.PlayerSelector)
             };
 
             _currentState = _allStates[0];
