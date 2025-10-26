@@ -23,9 +23,5 @@ namespace Assets.GAME.Scripts {
         private void Awake() {
             _switcher = new GameStateMachine(this);
         }
-
-        private void Update() {
-            if (_switcher != null) _switcher.Update();
-        }
     }
 }

@@ -15,15 +15,15 @@ namespace Assets.GAME.Scripts.States {
         }
 
         public void Enter() {
+            _playerSelector.OnLastPairCompleteEvent += OnGameOver;
             _playerSelector.SetInputWork(true);
         }
 
+        private void OnGameOver() => _switcher.SwitchState<CardSetupState>();
+        
         public void Exit() {
+            _playerSelector.OnLastPairCompleteEvent -= OnGameOver;
             _playerSelector.SetInputWork(false);
-        }
-
-        public void Update() {
-            
         }
     }
 }

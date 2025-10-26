@@ -52,7 +52,5 @@ namespace Assets.GAME.Scripts.States {
             _view.OnRetryButtonPressedEvent -= InitializeSprites;
             _view.Hide();
         }
-
-        public void Update() { }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using Assets.GAME.Scripts.Card;
+using System;
 using UnityEngine;
 
 namespace Assets.GAME.Scripts.World.Player {
 
     public class PlayerSelector : MonoBehaviour {
+
+        public event Action OnLastPairCompleteEvent;
 
         [SerializeField] private Camera _camera;
         [SerializeField] private PlayerSelectorConfig _config;
@@ -14,7 +17,13 @@ namespace Assets.GAME.Scripts.World.Player {
         private bool _inputWork = false;
         private bool _timeoutWork = false;
 
+        private int _pairsComplete;
+        private int _targetPairsCount;
         private float _timer;
+
+        public void ResetPairsComplete() => _pairsComplete = 0;
+
+        public void SetTargetPairsCount(int value) => _targetPairsCount = value;
 
         public void SetInputWork(bool flag) => _inputWork = flag;
 
@@ -68,6 +77,7 @@ namespace Assets.GAME.Scripts.World.Player {
             if (_firstSelectedCard.ID == _secondSelectedCard.ID) {
                 _firstSelectedCard.Hide();
                 _secondSelectedCard.Hide();
+                _pairsComplete++;
             }
             else {
                 _firstSelectedCard.Deselect();
@@ -76,6 +86,8 @@ namespace Assets.GAME.Scripts.World.Player {
 
             SetInputWork(true);
             _firstSelectedCard = _secondSelectedCard = null;
+
+            if (_pairsComplete >= _targetPairsCount) OnLastPairCompleteEvent?.Invoke();
         }
 
         private void Update() {
