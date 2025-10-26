@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Assets.GAME.Scripts.Card {
 
-    [RequireComponent(typeof(Collider2D))]
-    public class Card : MonoBehaviour {
+    [RequireComponent(typeof(BoxCollider2D))]
+    public class CardMain : MonoBehaviour {
 
         [SerializeField] private CardView _view;
         [SerializeField] private CardConfig _config;

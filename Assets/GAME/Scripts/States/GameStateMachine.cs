@@ -16,7 +16,9 @@ namespace Assets.GAME.Scripts.States {
 
                 new LoadingState(this, entryPoint.LoadingScreenView, entryPoint.SpritesHolder),
 
-                new CardSetupState()
+                new CardSetupState(this, entryPoint.CardSpawner),
+
+                new GameplayState()
             };
 
             _currentState = _allStates[0];
