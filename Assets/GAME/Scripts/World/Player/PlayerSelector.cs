@@ -7,6 +7,7 @@ namespace Assets.GAME.Scripts.World.Player {
     public class PlayerSelector : MonoBehaviour {
 
         public event Action OnLastPairCompleteEvent;
+        public event Action<int> OnPairCompleteEvent;
 
         [SerializeField] private Camera _camera;
         [SerializeField] private PlayerSelectorConfig _config;
@@ -78,6 +79,7 @@ namespace Assets.GAME.Scripts.World.Player {
                 _firstSelectedCard.Hide();
                 _secondSelectedCard.Hide();
                 _pairsComplete++;
+                OnPairCompleteEvent?.Invoke(_pairsComplete);
             }
             else {
                 _firstSelectedCard.Deselect();
